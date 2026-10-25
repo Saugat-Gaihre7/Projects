@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TaskFlow — Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="brand-mark" aria-hidden="true">✓</div>
+        <div>
+          <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+          <h1>Task<span>Flow</span></h1>
+          <p class="subtitle">A clear head starts with a clear plan.</p>
+        </div>
+        <div class="hero-orb orb-one"></div>
+        <div class="hero-orb orb-two"></div>
+      </header>
+
+      <section class="workspace">
+        <section class="control-panel panel">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">COMMAND CENTER</p>
+              <h2>What would you like to do?</h2>
+            </div>
+            <span class="status-dot">Ready</span>
+          </div>
+
+          <div class="command-grid" role="group" aria-label="Task commands">
+            <button class="command-card add" data-command="1">
+              <span class="command-number">01</span>
+              <span class="command-icon">＋</span>
+              <span class="command-title">Add task</span>
+              <span class="command-description">Create something new</span>
+            </button>
+            <button class="command-card update" data-command="2">
+              <span class="command-number">02</span>
+              <span class="command-icon">↻</span>
+              <span class="command-title">Update task</span>
+              <span class="command-description">Edit an existing task</span>
+            </button>
+            <button class="command-card delete" data-command="3">
+              <span class="command-number">03</span>
+              <span class="command-icon">−</span>
+              <span class="command-title">Delete task</span>
+              <span class="command-description">Remove a task</span>
+            </button>
+            <button class="command-card show" data-command="4">
+              <span class="command-number">04</span>
+              <span class="command-icon">▤</span>
+              <span class="command-title">Show tasks</span>
+              <span class="command-description">View your task list</span>
+            </button>
+          </div>
+
+          <form id="command-form" class="command-form">
+            <label for="command-input">Or type a command number</label>
+            <div class="command-entry">
+              <input
+                id="command-input"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="Enter 1, 2, 3, or 4…"
+                maxlength="12"
+              />
+              <button type="submit" class="primary-button">
+                Run command <span>→</span>
+              </button>
+            </div>
+            <p class="hint">1 Add · 2 Update · 3 Delete · 4 Show tasks</p>
+          </form>
+
+          <div id="action-area" class="action-area" hidden>
+            <div class="action-heading">
+              <div>
+                <p class="eyebrow" id="action-kicker">NEW TASK</p>
+                <h3 id="action-title">Add a task</h3>
+              </div>
+              <button
+                id="cancel-action"
+                class="icon-button"
+                type="button"
+                aria-label="Cancel"
+              >
+                ×
+              </button>
+            </div>
+            <form id="task-form">
+              <div id="task-id-wrap" class="field" hidden>
+                <label for="task-id">Task ID</label>
+                <input
+                  id="task-id"
+                  type="number"
+                  min="1"
+                  placeholder="Enter the task ID"
+                />
+              </div>
+              <div class="field">
+                <label for="task-name">Task description</label>
+                <input
+                  id="task-name"
+                  type="text"
+                  maxlength="160"
+                  placeholder="e.g. Finish my assignment"
+                />
+              </div>
+              <div class="form-actions">
+                <button class="primary-button" id="save-task" type="submit">
+                  Save task <span>→</span>
+                </button>
+                <button
+                  class="secondary-button"
+                  id="cancel-action-2"
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+          <div
+            id="notice"
+            class="notice"
+            role="status"
+            aria-live="polite"
+          ></div>
+        </section>
+
+        <section class="tasks-panel panel">
+          <div class="section-heading table-heading">
+            <div>
+              <p class="eyebrow">YOUR OVERVIEW</p>
+              <h2>Task board</h2>
+              <p class="table-subtitle">
+                Your table stays ready. Choose
+                <strong>4 · Show tasks</strong> to reveal your saved tasks.
+              </p>
+            </div>
+            <div class="task-count">
+              <strong id="task-count">0</strong><span>tasks saved</span>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th class="id-column">ID</th>
+                  <th>Task description</th>
+                  <th class="state-column">Status</th>
+                </tr>
+              </thead>
+              <tbody id="task-table-body">
+                <tr class="empty-row">
+                  <td colspan="3">
+                    <div class="empty-state">
+                      <div class="empty-icon">▤</div>
+                      <strong>Tasks are hidden for now</strong>
+                      <span
+                        >Type <b>4</b> or choose “Show tasks” to display your
+                        list here.</span
+                      >
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span><span class="live-dot"></span> Local workspace</span>
+            <button id="exit-button" class="exit-button" type="button">
+              <span>↗</span> Exit
+            </button>
+          </div>
+        </section>
+      </section>
+      <footer>Made for focus. Built for your next step.</footer>
+    </main>
+    <div id="exit-overlay" class="exit-overlay" hidden>
+      <div class="exit-card">
+        <div class="exit-check">✓</div>
+        <p class="eyebrow">SESSION ENDED</p>
+        <h2>You're all set.</h2>
+        <p>
+          Your tasks are saved in this browser. You can start again whenever
+          you're ready.
+        </p>
+        <button id="restart-button" class="primary-button" type="button">
+          Back to TaskFlow <span>→</span>
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
